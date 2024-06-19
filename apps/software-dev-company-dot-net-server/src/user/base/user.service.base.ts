@@ -11,6 +11,8 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, User as PrismaUser } from "@prisma/client";
+import { UserCreateInput } from "./UserCreateInput";
+import { User } from "./User";
 
 export class UserServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -33,5 +35,11 @@ export class UserServiceBase {
   }
   async deleteUser(args: Prisma.UserDeleteArgs): Promise<PrismaUser> {
     return this.prisma.user.delete(args);
+  }
+  async LoginUser(args: UserCreateInput): Promise<string> {
+    throw new Error("Not implemented");
+  }
+  async RegisterUser(args: UserCreateInput): Promise<User> {
+    throw new Error("Not implemented");
   }
 }

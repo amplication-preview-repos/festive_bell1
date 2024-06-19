@@ -20,6 +20,7 @@ import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { CreateUserArgs } from "./CreateUserArgs";
 import { UpdateUserArgs } from "./UpdateUserArgs";
 import { DeleteUserArgs } from "./DeleteUserArgs";
+import { UserCreateInput } from "./UserCreateInput";
 import { UserService } from "../user.service";
 @graphql.Resolver(() => User)
 export class UserResolverBase {
@@ -85,5 +86,21 @@ export class UserResolverBase {
       }
       throw error;
     }
+  }
+
+  @graphql.Mutation(() => String)
+  async LoginUser(
+    @graphql.Args()
+    args: UserCreateInput
+  ): Promise<string> {
+    return this.service.LoginUser(args);
+  }
+
+  @graphql.Mutation(() => User)
+  async RegisterUser(
+    @graphql.Args()
+    args: UserCreateInput
+  ): Promise<User> {
+    return this.service.RegisterUser(args);
   }
 }
